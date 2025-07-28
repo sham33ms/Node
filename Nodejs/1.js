@@ -2,23 +2,37 @@ const fs= require("fs");
 
 //file write in sync
 console.log("start")
-fs.writeFileSync("hello.txt","hello");
+fs.writeFileSync("hello.txt","hello i am created using the sync write file ");
 console.log("file creeated")
 console.log("End")
+// file read with sync
+console.log('1. Starting sync read...');
+const data = fs.readFileSync('hello.txt','utf8');
+console.log('2. File contents:', data);
+console.log('3. Done reading file');
 
 
 //file write in async
 console.log("start");
-
-fs.writeFile("hi.txt", "hi", (err) => {
+fs.writeFile("hi.txt", "hi i am created by async write file", (err) => {
   if (err) {
     console.error("Error writing file:", err);
   } else {
     console.log("file created");
   }
 });
-
 console.log("End");
+
+
+//file created by async in read 
+console.log('1. Starting async read...');
+fs.readFile('hi.txt', 'utf8', (err, dataa) => {
+  if (err) throw err;
+  console.log('2. File contents:', dataa);
+});
+
+console.log('3. Done starting read operation');
+
 
 //using http for localhost
 
@@ -62,11 +76,6 @@ const server = http.createServer((req, res) => {
 
 
 //initilaizing the server port
-server.listen(3000, () => {
-  console.log("Server running on http://localhost:3000");
+server.listen(3001, () => {
+  console.log("Server running on http://localhost:3001");
 });
-
-
-
-
-
