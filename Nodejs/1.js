@@ -6,6 +6,9 @@ console.log("Hello from Node.js!");
 const http = require('http');
 
 const server = http.createServer((req, res) => {
+  res.writeHead(200, {'Content-Type': 'text/html'});
+  res.write("<h1>hi</h1>");
+  res.write("<h2>HI</h2>")
   res.end('Hello from the server!');
 });
 
