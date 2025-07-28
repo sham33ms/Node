@@ -2,7 +2,7 @@ const fs= require("fs");
 
 //file write in sync
 console.log("start")
-fs.writeFileSync("hello.txt","hi");
+fs.writeFileSync("hello.txt","hello");
 console.log("file creeated")
 console.log("End")
 
