@@ -1,4 +1,7 @@
-const User = require('../models/User');
+const {User,Post} = require('../models');
+const sequelize = require('../config/db');
+const { Op } = require('sequelize');
+
 
 //post to create user
 exports.createuser=async (req, res) => {
@@ -77,3 +80,39 @@ exports.edituser=async (req, res) =>
     res.send({ msg: ' User deleted successfully' });
  
 }
+exports.postuser = async (req, res) => {
+  await sequelize.sync({ force: false }); // recreate tables
+  // const user = await User.create({ name: 'Shamem', email:"sthhdhm@gl.com" });
+  const { title, content, userId } = req.body;
+  const post1 = await Post.create({ title, content, userId});
+
+  // const result = await User.findOne({
+  //   where: { id: user.id },
+  //   include: Post
+  // });
+
+  res.send(post1);
+}
+
+exports.opertaor = async (req, res) => {
+  
+    const opp = await User.findAll({
+      where: {
+        name: {
+          [Op.like]: 'Sh%',
+        },email:{[Op.like]:'%@g%'}
+      },
+    });
+    res.json(opp);} // Send actual data, not just "op"
+  
+
+exports.leftjoin =async(req,res)=>{
+  const user = await Post.findAll({
+    include:{
+      model:User,
+      required:false
+    }
+  })
+  res.json(user);
+}
+
